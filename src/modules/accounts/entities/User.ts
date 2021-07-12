@@ -22,7 +22,7 @@ class User {
   driver_license: string
 
   @Column()
-  admin: boolean
+  isAdmin: boolean
 
   @Column()
   avatar: string
@@ -34,6 +34,7 @@ class User {
     if (!this.id) {
       this.id = uuidV4()
     }
+    this.avatar = ''
   }
 }
 
