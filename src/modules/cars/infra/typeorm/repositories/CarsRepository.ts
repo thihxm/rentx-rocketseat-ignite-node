@@ -48,18 +48,18 @@ class CarsRepository implements ICarsRepository {
   ): Promise<Car[]> {
     const carsQuery = await this.repository
       .createQueryBuilder('cars')
-      .where('cars.available = :available', { available: true })
+      .where('available = :available', { available: true })
 
     if (brand) {
-      carsQuery.andWhere('cars.brand = :brand', { brand })
+      carsQuery.andWhere('brand = :brand', { brand })
     }
 
     if (category_id) {
-      carsQuery.andWhere('cars.category_id = :category_id', { category_id })
+      carsQuery.andWhere('category_id = :category_id', { category_id })
     }
 
     if (name) {
-      carsQuery.andWhere('cars.name = :name', { name })
+      carsQuery.andWhere('name = :name', { name })
     }
 
     const cars = await carsQuery.getMany()
