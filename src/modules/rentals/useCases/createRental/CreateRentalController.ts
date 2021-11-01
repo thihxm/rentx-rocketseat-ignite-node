@@ -19,3 +19,5 @@ class CreateRentalController {
     return res.status(201).json(rental)
   }
 }
+
+export { CreateRentalController }
