@@ -48,19 +48,9 @@ describe('Create Rental', () => {
   })
 
   it('should not be able to create a new rental if the user has an open rental', async () => {
-    const car = await carsRepositoryInMemory.create({
-      name: 'Test',
-      description: 'Car Test',
-      daily_rate: 100,
-      license_plate: 'test',
-      fine_amount: 40,
-      category_id: '1234',
-      brand: 'brand',
-    })
-
-    await createRentalUseCase.execute({
+    await rentalsRepositoryInMemory.create({
       user_id: '12345',
-      car_id: car.id,
+      car_id: '111111',
       expected_return_date: tomorrow,
     })
 
@@ -76,46 +66,26 @@ describe('Create Rental', () => {
   })
 
   it('should not be able to create a new rental if the car has an open rental', async () => {
-    const car = await carsRepositoryInMemory.create({
-      name: 'Test',
-      description: 'Car Test',
-      daily_rate: 100,
-      license_plate: 'test',
-      fine_amount: 40,
-      category_id: '1234',
-      brand: 'brand',
-    })
-
-    await createRentalUseCase.execute({
+    await rentalsRepositoryInMemory.create({
       user_id: '123',
-      car_id: car.id,
+      car_id: '22222',
       expected_return_date: tomorrow,
     })
 
     await expect(
       createRentalUseCase.execute({
         user_id: '321',
-        car_id: car.id,
+        car_id: '22222',
         expected_return_date: tomorrow,
       })
     ).rejects.toEqual(new AppError('Car is not available'))
   })
 
   it('should not be able to create a new rental with invalid return time', async () => {
-    const car = await carsRepositoryInMemory.create({
-      name: 'Test',
-      description: 'Car Test',
-      daily_rate: 100,
-      license_plate: 'test',
-      fine_amount: 40,
-      category_id: '1234',
-      brand: 'brand',
-    })
-
     await expect(
       createRentalUseCase.execute({
         user_id: '123',
-        car_id: car.id,
+        car_id: 'test',
         expected_return_date: dayjs().toDate(),
       })
     ).rejects.toEqual(new AppError('Invalid return time'))
