@@ -1,5 +1,15 @@
-interface IMailProvider {
-  sendMail(to: string, subject: string, body: string): Promise<void>
+interface IForgotMailVariables {
+  name: string
+  link: string
 }
 
-export { IMailProvider }
+interface IMailProvider {
+  sendMail(
+    to: string,
+    subject: string,
+    variables: IForgotMailVariables,
+    path: string
+  ): Promise<void>
+}
+
+export { IMailProvider, IForgotMailVariables }
