@@ -28,7 +28,7 @@ describe('Send Forgot Mail', () => {
   })
 
   it('should be able to send a forgot password mail to user', async () => {
-    const sendMail = spyOn(mailProvider, 'sendMail')
+    const sendMail = jest.spyOn(mailProvider, 'sendMail')
 
     await usersRepositoryInMemory.create({
       driver_license: '1skjasd',
@@ -49,7 +49,10 @@ describe('Send Forgot Mail', () => {
   })
 
   it('should be able to create an users token', async () => {
-    const generatedTokenMail = spyOn(usersRepositoryInMemory, 'create')
+    const generatedTokenMail = jest.spyOn(
+      usersTokensRepositoryInMemory,
+      'create'
+    )
 
     await usersRepositoryInMemory.create({
       driver_license: 'aaaad123909j',
