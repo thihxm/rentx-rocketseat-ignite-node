@@ -11,7 +11,8 @@ class LocalStorageProvider implements IStorageProvider {
       resolve(upload.tmpFolder, file),
       resolve(`${upload.tmpFolder}/${folder}`, file)
     )
-    throw new Error('Method not implemented.')
+
+    return file
   }
 
   async delete(file: string, folder: string): Promise<void> {
