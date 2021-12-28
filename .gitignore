@@ -54,5 +54,6 @@ tmp/cars/*
 !tmp/cars/
 !tmp/cars/.gitkeep
 
+.vscode/
 # Build directory
 dist/
