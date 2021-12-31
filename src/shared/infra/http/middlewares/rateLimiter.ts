@@ -1,11 +1,13 @@
 import { NextFunction, Request, Response } from 'express'
+import Redis from 'ioredis'
 import { RateLimiterRedis } from 'rate-limiter-flexible'
-import redis from 'redis'
 
 import { AppError } from '@shared/errors/AppError'
 
-const redisClient = redis.createClient({
-  url: `redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`,
+const redisClient = new Redis({
+  host: process.env.REDIS_HOST,
+  port: Number(process.env.REDIS_PORT),
+  enableOfflineQueue: false,
 })
 
 const limiter = new RateLimiterRedis({
